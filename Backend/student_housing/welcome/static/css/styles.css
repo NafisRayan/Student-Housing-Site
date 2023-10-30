@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-image: url('imagehome.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center; 
+    font-family: 'EB Garamond', serif;
+}
+
+
+body {
+    margin-top: 6%;
+    margin-left: 7%;
+}
+
+
+.title {
+    width: 35%;
+    font-size: 30px;
+    margin-bottom: 2%;
+    color: rgb(79 59 59);
+    font-weight: 900;
+    padding-bottom: 2%;
+    border-bottom: 2px solid rgb(79 59 59);
+    text-shadow: 4px 4px 12px rgba(0,0,0,0.43);
+
+}
+
+.title-2{
+    margin-bottom: 2%;
+    width: 35%;
+    color: rgb(79 59 59);
+    text-align: center;
+}
+
+.buttons {
+    width: 35%;
+}
+
+button {
+    padding: 2%;
+    font-size: 20px;
+    margin-right: 2%;
+    border-radius: 8px;
+    border: 1.5px solid rgb(79 59 59);
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 9px 12px 17px -11px rgba(0,0,0,0.8);
+    -webkit-box-shadow: 9px 12px 17px -11px rgba(0,0,0,0.8);
+    -moz-box-shadow: 9px 12px 17px -11px rgba(0,0,0,0.8);
+}
