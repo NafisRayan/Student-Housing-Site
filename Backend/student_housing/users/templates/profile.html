@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="content">
+        <h2>User Profile</h2>
+        <div class="profile-info">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+        {% if session.user_id %}
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        {% endif %}
+    </section>
+{% endblock %}
