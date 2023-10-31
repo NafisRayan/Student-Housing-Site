@@ -53,3 +53,8 @@ button:hover {
     -webkit-box-shadow: 9px 12px 17px -11px rgba(0,0,0,0.8);
     -moz-box-shadow: 9px 12px 17px -11px rgba(0,0,0,0.8);
 }
+
+a {
+    text-decoration: none;
+    color: rgb(79 59 59);
+}
