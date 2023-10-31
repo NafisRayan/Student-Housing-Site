@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>Student Housing</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
@@ -10,9 +11,9 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/dorm_room_details">Dorm Room Details</a></li> <!-- New link for Dorm Room Details -->
+                <li><a href="{% url 'users_login' %}">Login</a></li>
+                <li><a href="{% url 'users_register' %}">Register</a></li>
+                <li><a href="#">Dorm Room Details</a></li> <!-- New link for Dorm Room Details -->
             </ul>
         </nav>
     </header>
