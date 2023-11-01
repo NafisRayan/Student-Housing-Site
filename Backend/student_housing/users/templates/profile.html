@@ -1,18 +1,17 @@
-{% extends "base.html" %}
+{% extends "profile_base.html" %}
 
 {% block content %}
     <section class="content">
         <h2>User Profile</h2>
         <div class="profile-info">
-            <p><strong>ID:</strong> {{ user.id }}</p>
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Password:</strong> {{ user.password }}</p>
-            <p><strong>NID:</strong> {{ user.nid }}</p>
-            <p><strong>Location:</strong> {{ user.location }}</p>
+            <p><strong>ID: {{database_output.id}}</strong></p>
+            <p><strong>Username: {{ database_output.username }}</strong></p>
+            <p><strong>Email: {{ database_output.email }}</strong></p>
+            <!-- <p><strong>Password: {{ database_output.}}</strong></p> -->
+            <p><strong>NID: {{ database_output.nid }}</strong></p>
+            <!-- <p><strong>Location:</strong></p> -->
         </div>
-        {% if session.user_id %}
-            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
-        {% endif %}
+        <a href="{% url 'users_logout' %}" class="btn btn-danger">Logout</a>
+
     </section>
 {% endblock %}

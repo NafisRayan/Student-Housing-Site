@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome Back</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'users_profile' username=username %}">Your Profile</a></li>
+                <li><a href="#">Posts</a></li>
+                <li><a href="#">Create Post</a></li>
+                <li><a href="#">Dorm Room Details</a></li> <!-- New link for Dorm Room Details -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
