@@ -38,7 +38,8 @@ def users_register(request):
         ins= Register(username=username, email=email, password=password, nid=nid)
         ins.save()
         print("Those data are alredy save in db")
-        return render(request, 'login.html')
+        # return render(request, 'login.html')
+        return redirect('users_login')
     return render(request, 'register.html')
 
 def users_profile(request, username):
