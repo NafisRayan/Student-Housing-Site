@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body style="background-image: url('/static/bg8.gif'); background-size: cover;">
+    <h2>Create a New Post</h2>
+    <form action="/create_post" method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="single_room">Single Room</option>
+            <option value="double_room">Double Room</option>
+            <option value="triple_room">Triple Room</option>
+            <option value="quad_room">Quad Room</option>
+            <option value="twin_room">Twin Room</option>
+            <option value="suite">Suite</option>
+            <option value="studio">Studio</option>
+            <!-- Add other specific room types as needed -->
+        </select>
+        <br>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+        <br>
+
+        <label for="popularity">Popularity:</label>
+        <select id="popularity" name="popularity" required>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <br>
+
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="4" required></textarea>
+        <br>
+
+        <button type="submit">Create Post</button>
+    </form>
+</body>
+{% endblock %}
