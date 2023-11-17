@@ -8,4 +8,16 @@ class Register(models.Model):
     password=models.CharField(max_length=100) 
     nid=models.IntegerField() 
 
-    
+class Comment(models.Model):
+    comment = models.TextField()
+    commented_by = models.ForeignKey(Register, on_delete=models.CASCADE)
+
+class DormRoom(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    popularity = models.IntegerField(default=0)
+    type = models.CharField(max_length=50)
+    price = models.CharField(max_length=20)
+    link = models.URLField(max_length=200)
+    posted_by = models.ForeignKey(Register, on_delete=models.CASCADE)
+    comments = models.ForeignKey(Comment, on_delete=models.CASCADE)
