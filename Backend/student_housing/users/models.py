@@ -9,7 +9,7 @@ class Register(models.Model):
     nid=models.IntegerField() 
 
 class Comment(models.Model):
-    comment = models.TextField()
+    comment = models.TextField(null = True)
     commented_by = models.ForeignKey(Register, on_delete=models.CASCADE)
 
 class DormRoom(models.Model):
