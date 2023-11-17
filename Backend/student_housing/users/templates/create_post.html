@@ -3,7 +3,7 @@
 {% block content %}
 <body style="background-image: url('/static/bg8.gif'); background-size: cover;">
     <h2>Create a New Post</h2>
-    <form action="/create_post" method="post">
+    <form method="post">
         {% csrf_token %}
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
@@ -26,13 +26,13 @@
         <input type="number" id="price" name="price" required>
         <br>
 
-        <label for="popularity">Popularity:</label>
+        <!-- <label for="popularity">Popularity:</label>
         <select id="popularity" name="popularity" required>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
         </select>
-        <br>
+        <br> -->
 
         <label for="content">Content:</label>
         <textarea id="content" name="content" rows="4" required></textarea>

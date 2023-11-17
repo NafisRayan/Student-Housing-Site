@@ -4,6 +4,8 @@ from .models import Register
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib import messages
+from users.models import DormRoom
+from django.shortcuts import get_object_or_404
 
 
 def users_intro(request):
@@ -37,7 +39,7 @@ def users_register(request):
         #print(username, email, password, nid)
         ins= Register(username=username, email=email, password=password, nid=nid)
         ins.save()
-        print("Those data are already saved in db")
+        # print("Those data are already saved in db")
         # return render(request, 'login.html')
         return redirect('users_login')
     return render(request, 'register.html')
@@ -52,11 +54,22 @@ def users_profile(request, username):
     
     return render(request, 'profile.html', {'username' : username, 'database_output' : session_data_db})
 
-def create_post(request, username):
+def create_post(request,username):
     created_by = request.session.get('username')
     #created_by variable ta diye post model er posted_by field e entry hobe
+    if request.method=="POST":
+        title=request.POST['title']
+        content=request.POST['content']
+        type= request.POST['type']
+        price=request.POST['price']
+        register_instance = get_object_or_404(Register, username=created_by)
+       
+        ins= DormRoom(title=title,content=content, type=type,  price=price, posted_by = register_instance)
+        ins.save()
+        
     return render(request, 'create_post.html', {'username' : created_by})
 
 def users_logout(request):
     request.session.clear()
     return redirect('users_login')
+
