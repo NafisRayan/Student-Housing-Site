@@ -12,7 +12,7 @@
             <ul>
                 <li><a href="{% url 'users_profile' username=username %}">Your Profile</a></li>
                 <li><a href="#">Posts</a></li>
-                <li><a href="#">Create Post</a></li>
+                <li><a href="{% url 'create_post' username=username %}">Create Post</a></li>
                 <li><a href="#">Dorm Room Details</a></li> <!-- New link for Dorm Room Details -->
             </ul>
         </nav>

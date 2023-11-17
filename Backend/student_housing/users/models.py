@@ -20,4 +20,4 @@ class DormRoom(models.Model):
     price = models.CharField(max_length=20)
     link = models.URLField(max_length=200, null=True)
     posted_by = models.ForeignKey(Register, on_delete=models.CASCADE)
-    comments = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comments = models.ForeignKey(Comment, null=True, on_delete=models.CASCADE)

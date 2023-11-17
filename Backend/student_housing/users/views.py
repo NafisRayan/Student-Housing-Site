@@ -37,7 +37,7 @@ def users_register(request):
         #print(username, email, password, nid)
         ins= Register(username=username, email=email, password=password, nid=nid)
         ins.save()
-        print("Those data are alredy save in db")
+        print("Those data are already saved in db")
         # return render(request, 'login.html')
         return redirect('users_login')
     return render(request, 'register.html')
@@ -52,8 +52,10 @@ def users_profile(request, username):
     
     return render(request, 'profile.html', {'username' : username, 'database_output' : session_data_db})
 
-def create_post(request):
-    return render(request, 'create_post.html')
+def create_post(request, username):
+    created_by = request.session.get('username')
+    #created_by variable ta diye post model er posted_by field e entry hobe
+    return render(request, 'create_post.html', {'username' : created_by})
 
 def users_logout(request):
     request.session.clear()
