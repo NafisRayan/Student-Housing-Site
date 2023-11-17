@@ -52,6 +52,9 @@ def users_profile(request, username):
     
     return render(request, 'profile.html', {'username' : username, 'database_output' : session_data_db})
 
+def create_post(request):
+    return render(request, 'create_post.html')
+
 def users_logout(request):
     request.session.clear()
     return redirect('users_login')
