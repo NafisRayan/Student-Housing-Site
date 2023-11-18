@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from users.models import DormRoom
 from django.shortcuts import get_object_or_404
+from .forms import CommentForm
+
 
 
 def users_intro(request):
@@ -56,7 +58,6 @@ def users_profile(request, username):
 
 def create_post(request,username):
     created_by = request.session.get('username')
-    #created_by variable ta diye post model er posted_by field e entry hobe
     if request.method=="POST":
         title=request.POST['title']
         content=request.POST['content']
@@ -73,3 +74,19 @@ def users_logout(request):
     request.session.clear()
     return redirect('users_login')
 
+
+def Comment_view(request,pk):   # pk >> primary key
+    commentform= CommentForm()
+    if request.method== 'POST':
+        commentform= CommentForm(request.POST)
+        if commentform.is_valid():
+            cd= commentform.cleaned_data
+            print(cd)
+            new_comment= commentform.save(commit=False)
+            new_comment.post= post.objects.get(pk=pk)
+            new_comment.save()
+            
+            
+    return render(request , 'comment_post.html', {'commentform':commentform})
+
+    
