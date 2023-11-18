@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from users.models import Register
-from .models import Register
+from .models import Register, Comment
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib import messages
@@ -65,8 +65,12 @@ def create_post(request,username):
         price=request.POST['price']
         register_instance = get_object_or_404(Register, username=created_by)
        
-        ins= DormRoom(title=title,content=content, type=type,  price=price, posted_by = register_instance)
+        ins= DormRoom(title=title,content=content, type=type,  price=price, link='', posted_by = register_instance)
         ins.save()
+
+        ins.link = f'http://127.0.0.1:8000/users/{created_by}/posts/learn_more/{ins.id}'
+        ins.save()
+
         
     return render(request, 'create_post.html', {'username' : created_by})
 
@@ -74,19 +78,50 @@ def users_logout(request):
     request.session.clear()
     return redirect('users_login')
 
+def show_posts(request, username):
+    username = request.session.get('username')
+    posts = DormRoom.objects.all()
+    
+    print(posts)
 
-def Comment_view(request,pk):   # pk >> primary key
-    commentform= CommentForm()
-    if request.method== 'POST':
-        commentform= CommentForm(request.POST)
-        if commentform.is_valid():
-            cd= commentform.cleaned_data
-            print(cd)
-            new_comment= commentform.save(commit=False)
-            new_comment.post= post.objects.get(pk=pk)
+    return render(request, 'dorm_room_details.html', {'dorm_rooms' : posts, 'username' : username})
+
+def learn_more(request, pk, username):
+    username = request.session.get('username')
+    post = DormRoom.objects.get(id = pk)
+
+    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username})
+
+
+def own_posts(request, username):
+    username = request.session.get('username')
+    user = get_object_or_404(Register, username=username)
+    posts = DormRoom.objects.filter(posted_by = user)
+
+    return render(request, 'own_posts.html', {'details' : posts, 'username' : username})
+
+# def delete_post(request, pk, username):
+#     username = request.session.get('username')
+#     post = DormRoom.objects.get(id = pk)
+#     post.delete()
+#     return render(request, 'delete_post.html', {'details' : post, 'username' : username})
+
+def comment_dorm_room(request, username, pk):
+    username = request.session.get('username')
+    dorm_room = get_object_or_404(DormRoom, id=pk)
+    commentor = get_object_or_404(Register, username= username)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_text = form.cleaned_data['comment']
+            
+            # Create a new Comment instance
+            new_comment = Comment(comment=comment_text, commented_by=commentor)
             new_comment.save()
             
-            
-    return render(request , 'comment_post.html', {'commentform':commentform})
+            # Append the new comment to the DormRoom instance
+            dorm_room.comments.add(new_comment)
 
-    
+    return redirect('learn_more', pk=pk, username=username)
+
+

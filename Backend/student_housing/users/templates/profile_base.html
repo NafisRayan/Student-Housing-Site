@@ -11,9 +11,9 @@
         <nav>
             <ul>
                 <li><a href="{% url 'users_profile' username=username %}">Your Profile</a></li>
-                <li><a href="#">Posts</a></li>
+                <li><a href="{% url 'show_posts' username=username %}">Posts</a></li>
                 <li><a href="{% url 'create_post' username=username %}">Create Post</a></li>
-                <li><a href="#">Dorm Room Details</a></li> <!-- New link for Dorm Room Details -->
+                <li><a href="{% url 'own_posts' username=username %}">Your Posts</a></li> <!-- New link for Dorm Room Details -->
             </ul>
         </nav>
     </header>
