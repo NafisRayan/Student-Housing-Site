@@ -1,6 +1,7 @@
 {% extends "profile_base.html" %}
 
 {% block content %}
+<body style="background-image: url('/static/bg5.gif'); background-size: cover;">
     <section class="content">
         <h2>User Profile</h2>
         <div class="profile-info">
@@ -14,4 +15,5 @@
         <a href="{% url 'users_logout' %}" class="btn btn-danger">Logout</a>
 
     </section>
+</body>
 {% endblock %}

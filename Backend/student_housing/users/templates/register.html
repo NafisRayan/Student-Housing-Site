@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<body style="background-image: url('/static/bg3.gif'); background-size: cover;">
     <section class="content">
         <h2>Register</h2>
         <form method="POST">
@@ -24,6 +25,7 @@
         </form>
         <p>Already have an account? <a href="{% url 'users_login'%}">Login</a></p>
     </section>
+</body>
 {% endblock %}
 
 
