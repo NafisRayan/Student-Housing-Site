@@ -89,8 +89,13 @@ def show_posts(request, username):
 def learn_more(request, pk, username):
     username = request.session.get('username')
     post = DormRoom.objects.get(id = pk)
+    show_del = False
+    post_username = post.posted_by.username
 
-    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username})
+    if(post_username == username):
+        show_del = True
+
+    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del})
 
 
 def own_posts(request, username):
@@ -100,11 +105,11 @@ def own_posts(request, username):
 
     return render(request, 'own_posts.html', {'details' : posts, 'username' : username})
 
-# def delete_post(request, pk, username):
-#     username = request.session.get('username')
-#     post = DormRoom.objects.get(id = pk)
-#     post.delete()
-#     return render(request, 'delete_post.html', {'details' : post, 'username' : username})
+def delete_post(request, pk, username):
+    username = request.session.get('username')
+    post = DormRoom.objects.get(id = pk)
+    post.delete()
+    return render(request, 'delete_post.html', {'details' : post, 'username' : username})
 
 def comment_dorm_room(request, username, pk):
     username = request.session.get('username')

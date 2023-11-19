@@ -20,11 +20,9 @@
             <p><strong>{{ comment.commented_by.username }}:</strong> {{ comment.comment }}</p>
         {% endfor %}
 
-        {% if delButton %}
         <form action="{% url 'delete_post' username=username pk=details.id %}" method="post" style="display: flex; justify-content: center;">
             {% csrf_token %}
             <button type="submit" style="text-align: center; background-color: rgb(175, 21, 21);">Delete Post</button>
         </form>
-        {% endif %}
     </div>
 {% endblock %}
