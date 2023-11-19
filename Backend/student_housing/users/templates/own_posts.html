@@ -1,6 +1,7 @@
 {% extends "profile_base.html" %}
 
 {% block content %}
+<body style="background-image: url('/static/bg8.gif'); background-size: cover;">
     <h2>Your Posts</h2>
     <div class="room-grid">
         {% for room in details %}
@@ -20,4 +21,5 @@
             
         {% endfor %}
     </div>
+</body>
 {% endblock %}
