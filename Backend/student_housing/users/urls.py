@@ -13,5 +13,9 @@ urlpatterns = [
     path('<str:username>/posts/learn_more/<str:pk>', views.learn_more, name='learn_more'),
     path('<str:username>/posts/learn_more/<str:pk>/comment/', views.comment_dorm_room, name='comment_dorm_room'),
     path('<str:username>/posts/delete/<str:pk>', views.delete_post, name='delete_post'),
+    path('<str:username>/posts/search/', views.search_res, name='search_res'),
+    path('<str:username>/posts/bookmark-success/<str:pk>', views.bookmark_a_post, name='bookmark_a_post'),
+    path('<str:username>/posts/bookmarked/', views.bookmarked, name='bookmarked'),
+    path('<str:username>/posts/remove-bookmark-success/<str:pk>', views.remove_bookmark, name='remove_bookmark'),
     path("logout/", views.users_logout, name="users_logout"),
 ]

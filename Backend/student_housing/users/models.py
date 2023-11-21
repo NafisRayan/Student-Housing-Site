@@ -19,5 +19,6 @@ class DormRoom(models.Model):
     type = models.CharField(max_length=50)
     price = models.CharField(max_length=20)
     link = models.URLField(max_length=200, null=True)
-    posted_by = models.ForeignKey(Register, on_delete=models.CASCADE)
+    posted_by = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='posted')
     comments = models.ManyToManyField(Comment, blank=True)
+    bookmarked_by = models.ManyToManyField(Register, blank=True, related_name='bookmarked')

@@ -26,6 +26,20 @@
             {% csrf_token %}
             <button type="submit" style="text-align: center; background-color: rgb(175, 21, 21);">Delete Post</button>
         </form>
+        <br>
+        {% endif %}
+
+        {% if bookRemButton %}
+        <form action="{% url 'remove_bookmark' username=username pk=details.id %}" method="post" style="display: flex; justify-content: center;">
+            {% csrf_token %}
+            <button type="submit" style="background-color: rgb(175, 21, 21);">Remove Bookmark</button>
+        </form>
+
+        {% else %}
+        <form action="{% url 'bookmark_a_post' username=username pk=details.id %}" method="post" style="display: flex; justify-content: center;">
+            {% csrf_token %}
+            <button type="submit">Bookmark This Post</button>
+        </form>
         {% endif %}
     </div>
 </body>

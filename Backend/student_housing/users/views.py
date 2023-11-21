@@ -91,11 +91,22 @@ def learn_more(request, pk, username):
     post = DormRoom.objects.get(id = pk)
     show_del = False
     post_username = post.posted_by.username
+    show_bookmark = False
 
     if(post_username == username):
         show_del = True
 
-    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del})
+    #show if bookmarked or not
+    find_user = get_object_or_404(Register, username= username)
+    check_bookmark = DormRoom.objects.filter(bookmarked_by = find_user, id=post.id)
+
+    if(len(check_bookmark) > 0):
+        show_bookmark = True
+
+    else:
+        show_bookmark = False
+
+    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del, 'bookRemButton' : show_bookmark})
 
 
 def own_posts(request, username):
@@ -129,4 +140,33 @@ def comment_dorm_room(request, username, pk):
 
     return redirect('learn_more', pk=pk, username=username)
 
+def search_res(request, username):
+    username = request.session['username']
+    return render(request, 'search.html', {'username' : username})
 
+def bookmark_a_post(request, username, pk):
+    username = request.session['username']
+    dorm_room = get_object_or_404(DormRoom, id=pk)
+    user = get_object_or_404(Register, username=username)
+
+    if(request.method == 'POST'):
+        dorm_room.bookmarked_by.add(user)
+        dorm_room.save()
+
+    return render(request, 'bookmark_success.html', {'details' : dorm_room, 'username' : username})
+
+def bookmarked(request, username):
+    find_user = get_object_or_404(Register, username= username)
+    bookmarked_posts = DormRoom.objects.filter(bookmarked_by = find_user)
+    return render(request, 'bookmarked_posts.html', {'username' : username, 'details' : bookmarked_posts})
+
+def remove_bookmark(request, username, pk):
+    username = request.session['username']
+    find_user = get_object_or_404(Register, username= username)
+    dorm_room = get_object_or_404(DormRoom, id=pk)
+
+    if(request.method == 'POST'):
+        dorm_room.bookmarked_by.remove(find_user)
+        dorm_room.save()
+
+    return render(request, 'bookmark_remove_success.html', {'username' : username, 'details' : dorm_room})

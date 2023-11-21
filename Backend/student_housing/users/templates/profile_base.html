@@ -14,6 +14,7 @@
                 <li><a href="{% url 'show_posts' username=username %}">Posts</a></li>
                 <li><a href="{% url 'create_post' username=username %}">Create Post</a></li>
                 <li><a href="{% url 'own_posts' username=username %}">Your Posts</a></li> <!-- New link for Dorm Room Details -->
+                <li><a href="{% url 'bookmarked' username=username %}">Bookmarked Posts</a></li>
             </ul>
         </nav>
     </header>
