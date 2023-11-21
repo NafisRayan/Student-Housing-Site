@@ -13,6 +13,8 @@
                 <li><a href="{% url 'users_profile' username=username %}">Your Profile</a></li>
                 <li><a href="{% url 'show_posts' username=username %}">Posts</a></li>
                 <li><a href="{% url 'create_post' username=username %}">Create Post</a></li>
+                <li><a href="{% url 'search' username=username %}">Search Posts</a></li>
+                <li><a href="{% url 'sort' username=username %}">Sort Posts</a></li>
                 <li><a href="{% url 'own_posts' username=username %}">Your Posts</a></li> <!-- New link for Dorm Room Details -->
                 <li><a href="{% url 'bookmarked' username=username %}">Bookmarked Posts</a></li>
             </ul>

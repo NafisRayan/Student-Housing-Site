@@ -6,7 +6,7 @@
         <h1>Search Results for "{{ query }}"</h1>
         
         <!-- Sorting Form -->
-        <form action="/search" method="post">
+        <form method="post">
             <label for="sort">Sort by:</label>
             <select id="sort" name="sort">
                 <option value="default">Default</option>
@@ -25,9 +25,9 @@
         </ul>
 
         <!-- Link to Sorting Page -->
-        <a href="{{ url_for('sorting', query=query) }}">Change Sorting</a>
+        <a href="#">Change Sorting</a>
 
-        <a href="/">Back to Search</a>
+        <a href="#">Back to Search</a>
     </div>
 </body>
 {% endblock %}

@@ -170,3 +170,11 @@ def remove_bookmark(request, username, pk):
         dorm_room.save()
 
     return render(request, 'bookmark_remove_success.html', {'username' : username, 'details' : dorm_room})
+
+def search(request, username):
+    username = request.session['username']
+    return render(request, 'searching.html', {'username' : username})
+
+def sort(request, username):
+    username = request.session['username']
+    return render(request, 'sorting.html', {'username' : username})
