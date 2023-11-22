@@ -4,20 +4,35 @@
 <body style="background-image: url('/static/bg6.gif'); background-size: cover;">
     <div class="container">
         <h1>Search Page</h1>
-        <form action="#" method="post">
+        <form action="" method="get">
             {% csrf_token %}
             <label for="query">Search:</label>
             <input type="text" id="query" name="query" required>
             
-            <label for="sort">Sort by:</label>
+            <!-- <label for="sort">Sort by:</label>
             <select id="sort" name="sort">
                 <option value="default">Default</option>
                 <option value="alphabetical">Alphabetical</option>
-                <!-- Add more sorting options as needed -->
-            </select>
+            </select> -->
             
             <button type="submit">Search</button>
         </form>
+
+        <div class="room-grid">
+            {% for room in res %}
+                <div class="room-card">
+                    <h3>{{room.title}}</h3>
+                    <p>{{ room.content }}</p>
+                    <p><strong>Type:</strong> {{ room.type }}</p>
+                    <p><strong>Price:</strong> {{ room.price }}</p>
+                    <!-- <p><strong>Popularity:</strong> {{ room.popularity }}</p> -->
+                    <p><strong>Posted by:</strong> {{room.posted_by.username}}</p>
+                    <a href="{{ room.link }}" target="_blank">Learn More</a>
+                </div>
+            
+                
+            {% endfor %}
+        </div>
     </div>
 </body>
 {% endblock %}

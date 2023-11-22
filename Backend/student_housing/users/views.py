@@ -141,7 +141,7 @@ def comment_dorm_room(request, username, pk):
     return redirect('learn_more', pk=pk, username=username)
 
 def search_res(request, username):
-    username = request.session['username']
+    
     return render(request, 'search.html', {'username' : username})
 
 def bookmark_a_post(request, username, pk):
@@ -173,7 +173,10 @@ def remove_bookmark(request, username, pk):
 
 def search(request, username):
     username = request.session['username']
-    return render(request, 'searching.html', {'username' : username})
+    q = request.GET.get('query')
+    res = DormRoom.objects.filter(title__icontains=q)
+    print(res)
+    return render(request, 'searching.html', {'username' : username, 'res' : res})
 
 def sort(request):
     sort = request.GET.get('sort')
@@ -202,9 +205,4 @@ def show_posts(request, username):
     # Add more sorting options as needed
 
     return render(request, 'dorm_room_details.html', {'dorm_rooms': posts, 'username': username, 'sort_option': sort_option})
-
-
-
-
-
 
