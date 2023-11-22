@@ -18,6 +18,7 @@ urlpatterns = [
     path('<str:username>/posts/bookmarked/', views.bookmarked, name='bookmarked'),
     path('<str:username>/posts/remove-bookmark-success/<str:pk>', views.remove_bookmark, name='remove_bookmark'),
     path('<str:username>/posts/search', views.search, name='search'),
-    path('<str:username>/posts/sort', views.sort, name='sort'),
+    path('posts/sort', views.sort, name='sort'),
+    path('<str:username>/posts/', views.show_posts, name='show_posts'),
     path("logout/", views.users_logout, name="users_logout"),
 ]
