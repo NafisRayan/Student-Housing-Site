@@ -173,9 +173,11 @@ def remove_bookmark(request, username, pk):
 
 def search(request, username):
     username = request.session['username']
-    q = request.GET.get('query')
-    res = DormRoom.objects.filter(title__icontains=q)
-    print(res)
+    res = DormRoom.objects.none()
+    if(request.method == 'POST'):
+        q = request.POST['query']
+        res = DormRoom.objects.filter(title__icontains=q)
+    # print(res)
     return render(request, 'searching.html', {'username' : username, 'res' : res})
 
 def sort(request):

@@ -4,7 +4,7 @@
 <body style="background-image: url('/static/bg6.gif'); background-size: cover;">
     <div class="container">
         <h1>Search Page</h1>
-        <form action="" method="get">
+        <form action="" method="post">
             {% csrf_token %}
             <label for="query">Search:</label>
             <input type="text" id="query" name="query" required>
