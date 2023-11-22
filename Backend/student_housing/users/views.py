@@ -7,7 +7,7 @@ from django.contrib import messages
 from users.models import DormRoom
 from django.shortcuts import get_object_or_404
 from .forms import CommentForm
-
+from django.db.models import Count
 
 
 def users_intro(request):
@@ -175,6 +175,36 @@ def search(request, username):
     username = request.session['username']
     return render(request, 'searching.html', {'username' : username})
 
-def sort(request, username):
-    username = request.session['username']
-    return render(request, 'sorting.html', {'username' : username})
+def sort(request):
+    sort = request.GET.get('sort')
+    if sort == None or sort == 'low':
+        sort = 'low'
+        posts = DormRoom.objects.all().order_by('price')
+    elif sort == 'high':
+        posts = DormRoom.objects.all().order_by('-price')
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.username
+    print(f'Inside sorting page!, {sort}')
+    
+    return render(request, 'sorting.html', {'username' : username,'posts':posts})
+
+
+
+def show_posts(request, username):
+    username = request.session.get('username')
+    posts = DormRoom.objects.all()
+
+    # Sorting logic
+    sort_option = request.POST.get('sort', 'default')
+    if sort_option == 'price_high_to_low':
+        posts = posts.order_by('-price')  # Sort by price in descending order (highest to lowest)
+    # Add more sorting options as needed
+
+    return render(request, 'dorm_room_details.html', {'dorm_rooms': posts, 'username': username, 'sort_option': sort_option})
+
+
+
+
+
+

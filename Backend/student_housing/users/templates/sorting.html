@@ -6,18 +6,36 @@
         <h1>Sorting Options</h1>
         
         <!-- Sorting Form -->
-        <form action="#" method="post">
+        <form action='' method="get">
+            
             <label for="sort">Sort by:</label>
             <select id="sort" name="sort">
-                <option value="default">Default</option>
-                <option value="alphabetical">Alphabetical</option>
+                <option value="default" > default </option>
+                <option value="low">Price Low to High</option>
+                <option value="high">Price High to Low</option>
                 <!-- Add more sorting options as needed -->
             </select>
-            <input type="hidden" name="query" value="{{ query }}">
+            {% comment %} <input type="hidden" name="query" value="{{ query }}"> {% endcomment %}
             <button type="submit">Apply Sorting</button>
         </form>
+        <h2>Dorm Room Details</h2>
+    <div class="room-grid">
+        {% for room in posts %}
+            <div class="room-card">
+                <h3>{{room.title}}</h3>
+                <p>{{ room.content }}</p>
+                <p><strong>Type:</strong> {{ room.type }}</p>
+                <p><strong>Price:</strong> {{ room.price }}</p>
+                <!-- <p><strong>Popularity:</strong> {{ room.popularity }}</p> -->
+                <p><strong>Posted by:</strong> {{room.posted_by.username}}</p>
+                <a href="{{ room.link }}" target="_blank">Learn More</a>
+            </div>
         
-        <a href="/">Back to Search</a>
+            
+        {% endfor %}
+    </div>
+        <a href="{% url 'search_res' username=username %}">Back to Search</a>
     </div>
 </body>
 {% endblock %}
+

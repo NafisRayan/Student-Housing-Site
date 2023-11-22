@@ -5,6 +5,7 @@
     <div class="container">
         <h1>Search Page</h1>
         <form action="#" method="post">
+            {% csrf_token %}
             <label for="query">Search:</label>
             <input type="text" id="query" name="query" required>
             
@@ -18,4 +19,8 @@
             <button type="submit">Search</button>
         </form>
     </div>
+</body>
 {% endblock %}
+
+
+
