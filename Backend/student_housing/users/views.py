@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from users.models import Register
-from .models import Register, Comment
+from .models import Register, Comment, Notification
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib import messages
@@ -106,7 +106,17 @@ def learn_more(request, pk, username):
     else:
         show_bookmark = False
 
-    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del, 'bookRemButton' : show_bookmark})
+    #show if proposal already sent
+    post_find = get_object_or_404(DormRoom, id=pk)
+    has_sent_proposal = Notification.objects.filter(post=post_find, user=find_user).exists()
+    check_own_post = DormRoom.objects.filter(id=pk)
+
+    own=False
+
+    if(check_own_post[0].posted_by.username == username):
+        own = True
+    
+    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del, 'bookRemButton' : show_bookmark, 'checkProposal' : has_sent_proposal, 'own' : own})
 
 
 def own_posts(request, username):
@@ -207,4 +217,36 @@ def show_posts(request, username):
     # Add more sorting options as needed
 
     return render(request, 'dorm_room_details.html', {'dorm_rooms': posts, 'username': username, 'sort_option': sort_option})
+
+def send_rent_proposal(request, username, pk):
+    username = request.session.get('username')
+    post = get_object_or_404(DormRoom, id=pk)
+    user = get_object_or_404(Register, username=username)
+
+    if(request.method == "POST"):
+        notification = Notification(post=post, user=user)
+        notification.save()
+
+    return render(request, 'rent_proposal_success.html', {'details' : post, 'username' : username})
+
+def unsend_rent_proposal(request, username, pk):
+    username = request.session.get('username')
+    post = get_object_or_404(DormRoom, id=pk)
+    user = get_object_or_404(Register, username=username)
+    notification_inst = Notification.objects.filter(post = post, user = user)
+
+    if(request.method == 'POST'):
+        if(request.method == 'POST'):
+            notification_inst.delete()
+
+    return render(request, 'unsend_proposal.html', {'details' : post, 'username' : username})
+
+def notifications(request, username):
+    viewer_username = request.session.get('username')
+    viewer = get_object_or_404(Register, username=viewer_username)
+    notifications = Notification.objects.filter(post__posted_by=viewer)
+
+    return render(request, 'notifications.html', {'dorm_rooms' : notifications, 'username' : username})
+
+    
 

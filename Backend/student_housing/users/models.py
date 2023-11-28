@@ -22,3 +22,7 @@ class DormRoom(models.Model):
     posted_by = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='posted')
     comments = models.ManyToManyField(Comment, blank=True)
     bookmarked_by = models.ManyToManyField(Register, blank=True, related_name='bookmarked')
+
+class Notification(models.Model):
+    post = models.ForeignKey(DormRoom, on_delete=models.CASCADE)
+    user = models.ForeignKey(Register, on_delete=models.CASCADE)

@@ -20,5 +20,8 @@ urlpatterns = [
     path('<str:username>/posts/search', views.search, name='search'),
     path('posts/sort', views.sort, name='sort'),
     path('<str:username>/posts/', views.show_posts, name='show_posts'),
+    path('<str:username>/posts/proposal-sent/<str:pk>', views.send_rent_proposal, name='send_rent_proposal'),
+    path('<str:username>/posts/proposal-unsent/<str:pk>', views.unsend_rent_proposal, name='unsend_rent_proposal'),
+    path('<str:username>/posts/notifications', views.notifications, name='notifications'),
     path("logout/", views.users_logout, name="users_logout"),
 ]

@@ -41,6 +41,31 @@
             <button type="submit">Bookmark This Post</button>
         </form>
         {% endif %}
+
+        <!-- <form method="post" action="{% url 'send_rent_proposal' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
+            {% csrf_token %}
+            <button>Send A Rent Proposal</button>
+        </form> -->
+
+        {% if not own %}
+
+            {% if checkProposal %}
+            <form method="post" action="{% url 'unsend_rent_proposal' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
+                {% csrf_token %}
+                <button style="background-color: rgb(175, 21, 21);">Unsend Rent Proposal</button>
+            </form>
+            {% else %}
+            <form method="post" action="{% url 'send_rent_proposal' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
+                {% csrf_token %}
+                <button>Send A Rent Proposal</button>
+            </form>
+            {% endif %}
+        {% endif %}
+
     </div>
+
+    <script>
+        document.title = "{{ details.title }}"
+    </script>
 </body>
 {% endblock %}
