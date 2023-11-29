@@ -63,10 +63,15 @@
 
             <h2>Send Mail</h2>
             
-            <form method="post" action="{% url 'send_email_view' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
+            <!-- <form method="post" action="{% url 'send_email_view' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
                 {% csrf_token %}
-                <button type="submit">Send Email</button>
-                {% comment %} <a href="{{email.link}}" target="_blank">submit</a> {% endcomment %}
+                <a type="submit">Send Email</button>
+                 {% comment %} <a href="{{email.link}}" target="_blank">submit</a> {% endcomment %} -->
+            <!-- </form>   -->
+
+            <div style="display: flex; justify-content: center; margin-bottom: 5px;">
+                <a href="{% url 'send_email_view' username=username pk=details.id %}">Send Email</a>
+            </div>
                 
                 
             

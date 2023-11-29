@@ -3,20 +3,23 @@
 {% block content %}
 <body style="background-image: url('/static/bg5.gif'); background-size: cover;">
     <h4> Content Clinet </h4>
-        <from method="POST" action="{% url 'send_email_view' %}">
+        <from method="POST" action="#">
         {% csrf_token%}
-            <input tupe='text' name="name" placeholder="Title fo the email" required>
+            <input type='text' name="name" placeholder="Title of the email" required>
             <br>
             <br>
-            <input type="email" name="email" placeholder="required massege" required>
+            <input type="email" name="email" placeholder="required message" required>
             <br>
             <br>
-            <textarea name='maassage' placeholder='Masage to be delivared' required>
+            <textarea name='message' placeholder='Message to be delivered' required></textarea>
+
             <br>
             <br>
             <button class="btn btn-primary mt-2" type='submit'>Send</button> 
             <br>
             <br>
-            </from>
+        </form>
+
+    </body>
        
 {% endblock %}
