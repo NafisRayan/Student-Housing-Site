@@ -252,18 +252,18 @@ def notifications(request, username):
 
     
 
-# def send_email_view(request,username, pk):
-#     # Your logic to send the email goes here
-#     if request.method=="POST":
-#         message= request.POST['message']
-#         email= request.POST['email']
-#         name= request.POST['name']
-#         send_mail(
-#             'Contect from', #for title
-#             messege, #for read massage
-#         )
-#     return render(request, 'dorm_room_post_details.html')
+def send_email_view(request,username, pk):
+    # Your logic to send the email goes here
+    if request.method=="POST":
+        message= request.POST['message']
+        email= request.POST['email']
+        name= request.POST['name']
+        send_mail(
+            'Contect from', #for title
+            messege, #for read massage
+        )
+    return render(request, 'dorm_room_post_details.html')
 
-def sendEmailPage(request):
-    return render(request,'email.html',{})
+# def sendEmailPage(request):
+#     return render(request,'email.html',{})
 

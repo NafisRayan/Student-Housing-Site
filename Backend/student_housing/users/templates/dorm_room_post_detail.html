@@ -63,8 +63,9 @@
 
             <h2>Send Mail</h2>
             
-            
-                <!--<a href="{% url 'sendemailview' %}"><button type="submit">Send Email</button></a> -->
+            <form method="post" action="{% url 'send_email_view' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
+                {% csrf_token %}
+                <button type="submit">Send Email</button>
                 
             
             

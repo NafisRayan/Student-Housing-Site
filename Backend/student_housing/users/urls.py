@@ -24,7 +24,7 @@ urlpatterns = [
     path('<str:username>/posts/proposal-unsent/<str:pk>', views.unsend_rent_proposal, name='unsend_rent_proposal'),
     path('<str:username>/posts/notifications', views.notifications, name='notifications'),
     path("logout/", views.users_logout, name="users_logout"),
-    #path('users/<str:username>/posts/send-email/<str:pk>', views.send_email_view, name='send_email_view'),
-    path('users/posts/sendemailview', views.sendEmailPage, name='sendEmailPage'), 
+    path('users/<str:username>/posts/send-email/<str:pk>', views.send_email_view, name='send_email_view'),
+   # path('users/posts/sendemailview', views.sendEmailPage, name='sendEmailPage'), 
 
 ]
