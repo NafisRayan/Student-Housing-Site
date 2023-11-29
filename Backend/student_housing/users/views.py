@@ -55,8 +55,15 @@ def users_profile(request, username):
 
     else:
         messages.warning(request, 'Please log in again to continue')
+
     
     return render(request, 'profile.html', {'username' : username, 'database_output' : session_data_db})
+
+def show_posted_profile(request, username, pk):
+    post = DormRoom.objects.get(id=pk)
+    acc_of = Register.objects.filter(username=post.posted_by.username)
+
+    return render(request, 'show_posted_profile.html', {'username' : username, 'posted_by': acc_of[0]})
 
 def create_post(request,username):
     created_by = request.session.get('username')
@@ -94,6 +101,7 @@ def learn_more(request, pk, username):
     show_del = False
     post_username = post.posted_by.username
     show_bookmark = False
+    posted_by_url = 'http://127.0.0.1:8000/users/'+ post_username+'/profile/'+pk
 
     if(post_username == username):
         show_del = True
@@ -118,7 +126,7 @@ def learn_more(request, pk, username):
     if(check_own_post[0].posted_by.username == username):
         own = True
     
-    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del, 'bookRemButton' : show_bookmark, 'checkProposal' : has_sent_proposal, 'own' : own})
+    return render(request, 'dorm_room_post_detail.html', {'details' : post, 'username' : username, 'delButton' : show_del, 'bookRemButton' : show_bookmark, 'checkProposal' : has_sent_proposal, 'own' : own, 'url' : posted_by_url})
 
 
 def own_posts(request, username):

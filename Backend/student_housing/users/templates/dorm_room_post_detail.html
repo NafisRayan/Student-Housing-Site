@@ -8,7 +8,8 @@
         <p><strong>Type:</strong> {{ details.type }}</p>
         <p><strong>Price:</strong> {{ details.price }}</p>
         <!-- <p><strong>Popularity:</strong> {{ details.popularity }}</p> -->
-        <p><strong>Posted by:</strong> {{details.posted_by.username}}</p>
+        <p><strong>Posted by:</strong> <a href="{{ url }}">{{ details.posted_by.username }}</a></p>
+
 
         <form method="post" action="{% url 'comment_dorm_room' username=username pk=details.id %}" style="display: flex;">
             {% csrf_token %}
