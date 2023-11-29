@@ -8,6 +8,8 @@ from users.models import DormRoom
 from django.shortcuts import get_object_or_404
 from .forms import CommentForm
 from django.db.models import Count
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def users_intro(request):
@@ -249,4 +251,19 @@ def notifications(request, username):
     return render(request, 'notifications.html', {'dorm_rooms' : notifications, 'username' : username})
 
     
+
+# def send_email_view(request,username, pk):
+#     # Your logic to send the email goes here
+#     if request.method=="POST":
+#         message= request.POST['message']
+#         email= request.POST['email']
+#         name= request.POST['name']
+#         send_mail(
+#             'Contect from', #for title
+#             messege, #for read massage
+#         )
+#     return render(request, 'dorm_room_post_details.html')
+
+def sendEmailPage(request):
+    return render(request,'email.html',{})
 
