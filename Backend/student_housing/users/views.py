@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from users.models import Register
-from .models import Register, Comment, Notification
+from .models import Register, Comment, Notification, Discussion
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib import messages
@@ -10,6 +10,7 @@ from .forms import CommentForm
 from django.db.models import Count
 from django.core.mail import send_mail
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 
 def users_intro(request):
@@ -304,3 +305,16 @@ def email_success(request, username):
 #             )
 
 #     return render(request, 'email.html',  {'username' : username})
+
+@csrf_exempt
+def group_chat(request, username):
+    username = request.session['username']
+    user = Register.objects.get(username=username)
+    if(request.method == "POST"):
+        chat = request.POST['sendtext']
+        ins = Discussion(user=user, message=chat)
+        ins.save()
+
+    discussions = Discussion.objects.all()
+
+    return render(request, 'discussion.html', {'username': username, 'dis':discussions})

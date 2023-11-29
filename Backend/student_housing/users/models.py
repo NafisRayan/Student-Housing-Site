@@ -26,3 +26,7 @@ class DormRoom(models.Model):
 class Notification(models.Model):
     post = models.ForeignKey(DormRoom, on_delete=models.CASCADE)
     user = models.ForeignKey(Register, on_delete=models.CASCADE)
+
+class Discussion(models.Model):
+    user = models.ForeignKey(Register, on_delete=models.CASCADE)
+    message = models.CharField(max_length=1000)

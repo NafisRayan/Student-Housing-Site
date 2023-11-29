@@ -28,5 +28,6 @@ urlpatterns = [
     path('<str:username>/posts/email-success', views.email_success, name='email_success'),
     path('<str:username>/profile/<str:pk>', views.show_posted_profile, name='show_posted_profile'),
    # path('users/posts/sendemailview', views.sendEmailPage, name='sendEmailPage'), 
+   path('<str:username>/chat', views.group_chat, name='group_chat'),
 
 ]
