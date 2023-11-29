@@ -256,6 +256,11 @@ def send_email_view(request,username, pk):
     # Your logic to send the email goes here
     username = request.session['username']
     
+    return render(request, 'email.html', {'username' : username})
+
+def email_success(request, username):
+    username = request.session['username']
+
     if request.method=="POST":
         # message= request.POST['message']
         # email= request.POST['email']
@@ -269,27 +274,8 @@ def send_email_view(request,username, pk):
             "settings.EMAIL_HOST_USER",
             [email, "jane@example.com"],
         )
-    
-    return render(request, 'email.html', {'username' : username})
 
-# def email_success(request, username, pk):
-#     username = request.session['username']
-
-#     if request.method=="POST":
-#         # message= request.POST['message']
-#         # email= request.POST['email']
-#         # name= request.POST['name']
-#         message = request.POST.get('message', '')
-#         email = request.POST.get('email', '')
-#         name = request.POST.get('name', '')
-#         send_mail(
-#             'Contect from', #for title
-#             message, #for read massage
-#             "settings.EMAIL_HOST_USER",
-#             [email, "jane@example.com"],
-#         )
-
-#     return render(request, 'email_success.html', {'username' : username})
+    return render(request, 'email_success.html', {'username' : username})
 
 
 # def sendEmailPage(request):

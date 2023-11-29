@@ -3,7 +3,7 @@
 {% block content %}
 <body style="background-image: url('/static/bg5.gif'); background-size: cover;">
     <h4> Content Clinet </h4>
-        <from method="POST" action="#">
+        <from method="POST" action="{% url 'email_success' username=username }">
         {% csrf_token%}
             <input type='text' name="name" placeholder="Title of the email" required>
             <br>
