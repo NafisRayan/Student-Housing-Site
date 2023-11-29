@@ -66,6 +66,8 @@
             <form method="post" action="{% url 'send_email_view' username=username pk=details.id %}" style="display: flex; margin-top: 5px; justify-content: center;">
                 {% csrf_token %}
                 <button type="submit">Send Email</button>
+                {% comment %} <a href="{{email.link}}" target="_blank">submit</a> {% endcomment %}
+                
                 
             
             

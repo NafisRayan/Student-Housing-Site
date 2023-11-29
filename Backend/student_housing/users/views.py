@@ -261,6 +261,8 @@ def send_email_view(request,username, pk):
         send_mail(
             'Contect from', #for title
             messege, #for read massage
+            "settings.EMAIL_HOST_USER",
+            [email, "jane@example.com"],
         )
     return render(request, 'dorm_room_post_details.html')
 

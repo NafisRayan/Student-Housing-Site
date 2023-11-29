@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Form</title>
-</head>
-<body>
-    <h2>Contact Us</h2>
-    <form method="post" action="{% url 'send_email_view' %}">
-        {% csrf_token %}
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
-        <br>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-        <br>
-        <label for="recipient">Recipient Email:</label>
-        <input type="email" id="recipient" name="recipient" required>
-        <br>
-        <button type="submit">Send Email</button>
-    </form>
-</body>
-</html>
+{% extends "profile_base.html" %}
+
+{% block content %}
+<body style="background-image: url('/static/bg5.gif'); background-size: cover;">
+    <h4> Content Clinet </h4>
+        <from method="POST" action="{% url 'send_email_view' %}">
+        {% csrf_token%}
+            <input tupe='text' name="name" placeholder="Title fo the email" required>
+            <br>
+            <br>
+            <input type="email" name="email" placeholder="required massege" required>
+            <br>
+            <br>
+            <textarea name='maassage' placeholder='Masage to be delivared' required>
+            <br>
+            <br>
+            <button class="btn btn-primary mt-2" type='submit'>Send</button> 
+            <br>
+            <br>
+            </from>
+       
+{% endblock %}
