@@ -13,7 +13,7 @@
                 <!-- <p><strong>Popularity:</strong> {{ room.popularity }}</p> -->
                 <!-- <p><strong>Posted by:</strong> {{room.posted_by.username}}</p> -->
                 <a href="{{room.post.link}}" target="_blank">Post Details</a>
-                <a href="#">Manage</a>
+                <a href="{% url 'manage_proposal' username=username pk=room.id %}">Manage</a>
             </div>
         
             

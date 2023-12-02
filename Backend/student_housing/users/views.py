@@ -318,3 +318,13 @@ def group_chat(request, username):
     discussions = Discussion.objects.all()
 
     return render(request, 'discussion.html', {'username': username, 'dis':discussions})
+
+def manage_proposal(request, username, pk):
+    try:
+        username = request.session['username']
+        notif = Notification.objects.get(id=pk)
+        return render(request, 'manage.html', {'username': username, 'notif': notif})
+    except Notification.DoesNotExist:
+        # Handle the case where the Notification doesn't exist
+        # You might want to redirect or display an error message
+        return HttpResponse("Notification not found.")
