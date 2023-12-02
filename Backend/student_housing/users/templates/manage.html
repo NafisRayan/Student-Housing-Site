@@ -1,0 +1,28 @@
+{% extends "profile_base.html" %}
+
+{% block content %}
+<body style="background-image: url('/static/bg8.gif'); background-size: cover;">
+    <h3>Proposal by {{notif.user.username}}</h3>
+
+    <div class="details">
+        <p>Post Title : {{notif.post.title}}</p>
+        <p>Type : {{notif.post.type}}</p>
+        <p>Price : {{notif.post.price}}</p>
+        <a href="{{notif.post.link}}">See post</a>
+    </div>
+
+    <br>
+
+    <div class="user-info">
+        <h3>User Info</h3>
+        <p>Username: {{notif.user.username}}</p>
+        <p>Email: {{notif.user.email}}</p>
+        <p>NID: {{notif.user.nid}}</p>
+    </div>
+
+    <div class="accept-deny" style = "display: flex; justify-content: center; margin-bottom: 25px;">
+        <a href="#" style="margin-right: 15px;">Accept proposal</a>
+        <a href="#" style="background-color: rgb(175, 21, 21);">Deny Proposal</a>
+    </div>
+</body>
+{% endblock %}
