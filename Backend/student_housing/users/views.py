@@ -413,4 +413,5 @@ def payment(request, username, pk):
     
 @csrf_exempt
 def confirm_pay(request, username):
+    username = request.session['username']
     return render(request, 'confirm_pay.html', {'username':username})
