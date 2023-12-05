@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from users.models import Register
-from .models import Register, Comment, Notification, Discussion
+from .models import Register, Comment, Notification, Discussion, ProposalResponse
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib import messages
@@ -11,6 +11,9 @@ from django.db.models import Count
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+
+from sslcommerz_lib import SSLCOMMERZ 
+from datetime import date, timedelta
 
 
 def users_intro(request):
@@ -237,6 +240,8 @@ def send_rent_proposal(request, username, pk):
     if(request.method == "POST"):
         notification = Notification(post=post, user=user)
         notification.save()
+        proposal = ProposalResponse(notification=notification, paid=False)
+        proposal.save()
 
     return render(request, 'rent_proposal_success.html', {'details' : post, 'username' : username})
 
@@ -256,8 +261,10 @@ def notifications(request, username):
     viewer_username = request.session.get('username')
     viewer = get_object_or_404(Register, username=viewer_username)
     notifications = Notification.objects.filter(post__posted_by=viewer)
+    sent_proposals = Notification.objects.filter(user=viewer)
+    proposal_res = ProposalResponse.objects.filter(notification__in=sent_proposals)
 
-    return render(request, 'notifications.html', {'dorm_rooms' : notifications, 'username' : username})
+    return render(request, 'notifications.html', {'dorm_rooms' : notifications, 'username' : username, 'sent':sent_proposals, 'res':proposal_res})
 
     
 
@@ -323,8 +330,87 @@ def manage_proposal(request, username, pk):
     try:
         username = request.session['username']
         notif = Notification.objects.get(id=pk)
-        return render(request, 'manage.html', {'username': username, 'notif': notif})
+        proposal_res = ProposalResponse.objects.get(notification=notif)
+        return render(request, 'manage.html', {'username': username, 'notif': notif, 'res':proposal_res})
     except Notification.DoesNotExist:
         # Handle the case where the Notification doesn't exist
         # You might want to redirect or display an error message
         return HttpResponse("Notification not found.")
+
+def accept_proposal(request, username, pk):
+    username = request.session['username']
+    notif = Notification.objects.get(id=pk)
+    exists = ProposalResponse.objects.get(notification=notif)
+
+
+    if(request.method == 'POST'):
+        exists.response = 'accepted'
+        exists.save()
+
+    return render(request, 'proposal_accepted.html', {'username':username, 'notif':notif})
+
+def deny_proposal(request, username, pk):
+    username = request.session['username']
+    notif = Notification.objects.get(id=pk)
+    exists = ProposalResponse.objects.get(notification=notif)
+
+    if(request.method == 'POST'):
+        exists.response = 'deny'
+        exists.save()
+        notif.delete()
+
+    return render(request, 'proposal_denied.html', {'username':username, 'notif':notif})
+
+@csrf_exempt
+def payment(request, username, pk):
+    # user_info = request.session.get('user_info')
+    # book_details = request.session.get('book_details')
+    username = request.session['username']
+    user = Register.objects.get(username=username)
+    print(user)
+    notif = Notification.objects.get(user=user)
+    print(notif)
+
+    try:
+        print(username)
+        # book_details = request.session.get('book_details')
+        # # print(book_details)
+        # chosen_book = request.session.get('chosen_book')
+        # print(chosen_book)
+        settings = { 'store_id': 'onlin64dd360da6a67', 'store_pass': 'onlin64dd360da6a67@ssl', 'issandbox': True }
+        sslcz = SSLCOMMERZ(settings)
+        post_body = {}
+        post_body['total_amount'] = str(notif.post.price)
+        post_body['currency'] = "BDT"
+        post_body['tran_id'] = "1"
+        post_body['success_url'] = f"http://127.0.0.1:8000/users/{username}/profile/payment/confirmed/"
+        post_body['fail_url'] = "http://127.0.0.1:8000/"
+        post_body['cancel_url'] = "http://127.0.0.1:8000/"
+        post_body['emi_option'] = 0
+        post_body['cus_name'] = username
+        post_body['cus_email'] = user.email
+        post_body['cus_phone'] = '01711111111111'
+        post_body['cus_add1'] = "customer address"
+        post_body['cus_city'] = "Dhaka"
+        post_body['cus_country'] = "Bangladesh"
+        post_body['shipping_method'] = "NO"
+        post_body['multi_card_name'] = ""
+        post_body['num_of_item'] = 1
+        post_body['product_name'] = "Test"
+        post_body['product_category'] = "Test Category"
+        post_body['product_profile'] = "general"
+
+        response = sslcz.createSession(post_body) # API response
+        # print(user_info)
+        print(response)
+
+        if(response['status'] == "SUCCESS"):
+            pass
+        return redirect(response['GatewayPageURL'])
+    
+    except:
+        return render(request, 'manage.html', {"username":username, 'notif':notif, 'user':user})
+    
+@csrf_exempt
+def confirm_pay(request, username):
+    return render(request, 'confirm_pay.html', {'username':username})

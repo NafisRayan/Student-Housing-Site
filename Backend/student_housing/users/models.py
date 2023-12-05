@@ -30,3 +30,8 @@ class Notification(models.Model):
 class Discussion(models.Model):
     user = models.ForeignKey(Register, on_delete=models.CASCADE)
     message = models.CharField(max_length=1000)
+
+class ProposalResponse(models.Model):
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
+    response = models.CharField(max_length=100, blank=True)
+    paid = models.BooleanField(default=False)
