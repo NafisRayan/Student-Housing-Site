@@ -39,6 +39,28 @@
                 </div>
             </div>
         {% endif %}
+        
+        <div>
+            <h3>Rented Dorms</h3>
+            <div class="grid">
+                {% for i in res %}
+                    {% if i.paid == True%}
+                    {% for room in res %}
+                    <div class="room-card">
+                        <h3>{{room.notification.post.title}}</h3>
+                        <p><strong>Price:</strong> {{ room.notification.post.price }}</p>
+                        <!-- <p><strong>Popularity:</strong> {{ room.popularity }}</p> -->
+                        <p><strong>Posted by:</strong> {{room.notification.post.posted_by.username}}</p>
+                        <p><strong>Status: </strong>Paid</p>
+                        <a href="{{room.notification.post.link}}" target="_blank">Post Details</a>
+                    </div>
+                
+                    
+                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
 
     <script>
         document.title = "Notifications"

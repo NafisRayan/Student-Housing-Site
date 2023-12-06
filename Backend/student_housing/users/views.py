@@ -54,6 +54,7 @@ def users_register(request):
 
 def users_profile(request, username):
     session_data = request.session.get('username')
+
     if(session_data is not None):
         session_data_db = Register.objects.get(username=session_data)
 
