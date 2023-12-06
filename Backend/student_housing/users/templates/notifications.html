@@ -26,7 +26,7 @@
                 <div class="room-grid">
                     {% for room in sent %}
                         <div class="room-card">
-                            <h3>Proposal by {{room.post.title}}</h3>
+                            <h3>{{room.post.title}}</h3>
                             <p><strong>Price:</strong> {{ room.post.price }}</p>
                             <!-- <p><strong>Popularity:</strong> {{ room.popularity }}</p> -->
                             <p><strong>Posted by:</strong> {{room.post.posted_by.username}}</p>

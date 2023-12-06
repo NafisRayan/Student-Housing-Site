@@ -20,7 +20,7 @@
         <p>NID: {{notif.user.nid}}</p>
     </div>
 
-    {% if res.notification.user.username == username %}
+    {% if res.notification.user.username == username and res.response == 'accepted' %}
             <p style="text-align: center;">The proposal has been accepted! The payment for this dorm room is still pending...</p>
 
         <form method="post" style="display: flex; justify-content: center;" action="{% url 'payment' username=username pk=notif.id%}">
@@ -28,6 +28,9 @@
             <button type="submit">Move to Payment</button>
         </form>
     {% else %}
+        {% if res.response == 'accepted' %}
+            <p style="display: flex; justify-content: center;">You have accepted this proposal</p>
+        {% else %}
         <div class="accept-deny" style = "display: flex; justify-content: center; margin-bottom: 25px;">
             <form class="accept-prop" method="post" style="margin-right: 10px;" action="{% url 'accept_proposal' username=username pk=notif.id %}">
                 {% csrf_token %}
@@ -39,6 +42,7 @@
                 <button style="background-color: rgb(175, 21, 21);">Deny Proposal</button>
             </form>
         </div>
+        {% endif %}
 
     {% endif %}
 

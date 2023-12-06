@@ -331,6 +331,7 @@ def manage_proposal(request, username, pk):
         username = request.session['username']
         notif = Notification.objects.get(id=pk)
         proposal_res = ProposalResponse.objects.get(notification=notif)
+        print(proposal_res.response)
         return render(request, 'manage.html', {'username': username, 'notif': notif, 'res':proposal_res})
     except Notification.DoesNotExist:
         # Handle the case where the Notification doesn't exist
@@ -370,6 +371,7 @@ def payment(request, username, pk):
     print(user)
     notif = Notification.objects.get(user=user)
     print(notif)
+    proposal = ProposalResponse.objects.get(notification=notif)
 
     try:
         print(username)
@@ -405,7 +407,8 @@ def payment(request, username, pk):
         print(response)
 
         if(response['status'] == "SUCCESS"):
-            pass
+            proposal.paid = True
+            proposal.save()
         return redirect(response['GatewayPageURL'])
     
     except:
@@ -413,5 +416,5 @@ def payment(request, username, pk):
     
 @csrf_exempt
 def confirm_pay(request, username):
-    username = request.session['username']
+    # username = request.session['username']
     return render(request, 'confirm_pay.html', {'username':username})
