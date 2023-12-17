@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body style="background-image: url('/static/bg6.gif'); background-size: cover;">
+    <div class="container">
+        <h1>Search Results for "{{ query }}"</h1>
+        
+        <!-- Sorting Form -->
+        <form method="post">
+            <label for="sort">Sort by:</label>
+            <select id="sort" name="sort">
+                <option value="default">Default</option>
+                <option value="alphabetical">Alphabetical</option>
+                <!-- Add more sorting options as needed -->
+            </select>
+            <input type="hidden" name="query" value="{{ query }}">
+            <button type="submit">Apply Sorting</button>
+        </form>
+
+        <!-- Display Search Results -->
+        <ul>
+            {% for result in results %}
+                <li>{{ result }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Link to Sorting Page -->
+        <a href="#">Change Sorting</a>
+
+        <a href="#">Back to Search</a>
+    </div>
+</body>
+{% endblock %}

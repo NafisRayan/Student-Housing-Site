@@ -1,0 +1,25 @@
+{% extends "profile_base.html" %}
+
+{% block content %}
+<body style="background-image: url('/static/bg5.gif'); background-size: cover;">
+    <h4> Content Clinet </h4>
+        <from method="POST" action="{% url 'email_success' username=username }">
+        {% csrf_token%}
+            <input type='text' name="name" placeholder="Title of the email" required>
+            <br>
+            <br>
+            <input type="email" name="email" placeholder="required message" required>
+            <br>
+            <br>
+            <textarea name='message' placeholder='Message to be delivered' required></textarea>
+
+            <br>
+            <br>
+            <button class="btn btn-primary mt-2" type='submit'>Send</button> 
+            <br>
+            <br>
+        </form>
+
+    </body>
+       
+{% endblock %}

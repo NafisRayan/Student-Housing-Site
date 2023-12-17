@@ -1,0 +1,173 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1E1E1E; /* Dark background */
+    color: #fff; /* White text color */
+}
+
+header {
+    background-color: #000; /* Dark header background */
+    color: #00ADB5; /* Light blue text color */
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Darker box shadow for header */
+    transition: background 0.3s, color 0.3s; /* Transition animations for background and color */
+}
+
+header:hover {
+    background-color: #1E1E1E; /* Dark header background on hover */
+    color: #fff; /* White text color on hover */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px; /* Larger header text size */
+    transition: font-size 0.3s; /* Font size transition animation */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+    transition: transform 0.3s; /* Transform transition animation */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* White text color */
+    font-weight: bold; /* Make navigation links bold */
+    transition: color 0.3s; /* Text color transition animation */
+}
+
+nav ul li a:hover {
+    color: #00796b; /* Slightly darker teal text color on hover */
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(30, 30, 30, 0.7); /* Dark background with 70% opacity */
+    color: #fff; /* White text color */
+    transition: background 0.3s; /* Background color transition animation */
+}
+
+/* Home Page Styles */
+.content {
+    background: rgba(51, 51, 51, 0.7); /* Dark teal background with 70% opacity */
+    padding: 20px;
+    border: 1px solid #00ADB5; /* Light blue border */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Darker box shadow for content */
+    color: #fff; /* White text color */
+    transition: background 0.3s; /* Background color transition animation */
+}
+
+.content:hover {
+    background: #1E1E1E; /* Dark background on hover */
+}
+
+/* Login and Register Page Styles */
+form {
+    background: rgba(30, 30, 30, 0.7); /* Dark background with 70% opacity */
+    color: #fff; /* White text color */
+    padding: 20px;
+    border: 1px solid #373737; /* Dark border */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Darker box shadow for forms */
+    transition: background 0.3s; /* Background color transition animation */
+}
+
+form:hover {
+    background: #333; /* Darker background on hover */
+}
+
+label {
+    color: #00ADB5; /* Light blue label text */
+    transition: color 0.3s; /* Text color transition animation */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    background: #333; /* Dark input field background */
+    color: #fff; /* White text color */
+    border: 1px solid #00ADB5; /* Light blue border */
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px 0;
+    transition: background 0.3s; /* Background color transition animation */
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="email"]:hover {
+    background: #1E1E1E; /* Darker background on hover */
+}
+
+button {
+    background: #00ADB5; /* Light blue button background */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s; /* Background color transition animation */
+}
+
+button:hover {
+    background: #00796B; /* Slightly darker teal on hover */
+}
+
+/* Add more styles and animations as needed */
+
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.room-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    transition: transform 0.3s; /* Transform transition animation */
+}
+
+.room-card:hover {
+    transform: scale(1.05); /* Scale up the card on hover */
+}
+
+h3 {
+    margin-top: 0;
+    font-size: 24px;
+    transition: color 0.3s; /* Text color transition animation */
+}
+
+.room-card:hover h3 {
+    color: #00796B; /* Slightly darker teal text color on hover */
+}
+
+a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #00796B;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background 0.3s; /* Background color transition animation */
+}
+
+a:hover {
+    background-color: #005A4D; /* Slightly darker teal on hover */
+}

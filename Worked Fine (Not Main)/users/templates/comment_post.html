@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Post a Comment</h2>
+  <form method="post" action="{% url 'comment_view' %}">
+    {% csrf_token %}
+    {{ commentform.as_p }}
+    <button type="submit">Post Comment</button>
+  </form>
+
+  <!-- Display existing comments if any -->
+  <h2>Existing Comments</h2>
+  {% for comment in comments %}
+    <div>
+      {{ comment.comment }} - {{ comment.commented_by.username }}
+    </div>
+  {% endfor %}
+{% endblock %}

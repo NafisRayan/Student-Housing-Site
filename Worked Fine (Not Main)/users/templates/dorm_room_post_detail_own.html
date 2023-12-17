@@ -1,0 +1,28 @@
+{% extends "profile_base.html" %}
+
+{% block content %}
+    <h2>{{details.title}}</h2>
+    <div class="">
+        <p>{{ details.content }}</p>
+        <p><strong>Type:</strong> {{ details.type }}</p>
+        <p><strong>Price:</strong> {{ details.price }}</p>
+        <!-- <p><strong>Popularity:</strong> {{ details.popularity }}</p> -->
+        <p><strong>Posted by:</strong> {{details.posted_by.username}}</p>
+
+        <form method="post" action="{% url 'comment_dorm_room' username=username pk=details.id %}" style="display: flex;">
+            {% csrf_token %}
+            <textarea name="comment" id="comm" cols="90" rows="2" style="background-color: inherit; color: white; resize: none;"></textarea>
+            <button type="submit" style="margin-left: 20px;">Comment</button>
+        </form>
+
+        <h2>Comments</h2>
+        {% for comment in details.comments.all %}
+            <p><strong>{{ comment.commented_by.username }}:</strong> {{ comment.comment }}</p>
+        {% endfor %}
+
+        <form action="{% url 'delete_post' username=username pk=details.id %}" method="post" style="display: flex; justify-content: center;">
+            {% csrf_token %}
+            <button type="submit" style="text-align: center; background-color: rgb(175, 21, 21);">Delete Post</button>
+        </form>
+    </div>
+{% endblock %}
